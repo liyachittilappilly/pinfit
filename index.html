@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinfit - Find Your Perfect Style</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e8ddd7; /* Light taupe background */
+            color: #4a3f3a; /* Dark taupe text */
+            line-height: 1.6;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #8b7355; /* Medium taupe */
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: #6b5d54; /* Medium-dark taupe */
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .body-shapes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .shape-card {
+            background-color: #f5f0ec; /* Very light taupe */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0d5cf; /* Light taupe border */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shape-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .shape-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .shape-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .shape-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #8b7355; /* Medium taupe */
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .shape-description {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            color: #6b5d54; /* Medium-dark taupe */
+            margin-bottom: 15px;
+            font-weight: 300;
+            text-align: center;
+        }
+
+        .dresses-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dress-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 100px;
+            border: 1px solid #e0d5cf; /* Light taupe border */
+        }
+
+        .dress-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .dress-item:hover .dress-image {
+            transform: scale(1.05);
+        }
+
+        .styling-tips {
+            margin-top: auto; /* Push to bottom of card */
+            background-color: #f0e6e6; /* Light taupe */
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #8b7355; /* Medium taupe accent */
+        }
+
+        .tips-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #8b7355; /* Medium taupe */
+            text-align: center;
+        }
+
+        .tips-list {
+            list-style-type: none;
+        }
+
+        .tips-list li {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 5px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9rem;
+            color: #6b5d54; /* Medium-dark taupe */
+        }
+
+        .tips-list li:before {
+            content: "•";
+            color: #8b7355; /* Medium taupe */
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .identify-section {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #f5f0ec; /* Very light taupe */
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0d5cf; /* Light taupe border */
+            margin-bottom: 40px;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #8b7355; /* Medium taupe */
+            letter-spacing: 1px;
+        }
+
+        .cta-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: #6b5d54; /* Medium-dark taupe */
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+        }
+
+        .identify-button {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #8b7355; /* Medium taupe */
+            color: #f5f0ec; /* Very light taupe */
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(139, 115, 85, 0.3);
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .identify-button:hover {
+            background-color: #6b5d54; /* Medium-dark taupe */
+            transform: translateY(-2px);
+        }
+
+        .camera-icon {
+            font-size: 1.2rem;
+        }
+
+        #cameraView {
+            margin-top: 30px;
+            display: none;
+        }
+
+        #cameraView img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0d5cf; /* Light taupe border */
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: #6b5d54; /* Medium-dark taupe */
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .body-shapes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .dresses-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .cta-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pinfit</h1>
+            <p class="tagline">Discover styles that celebrate your unique body shape</p>
+        </header>
+
+        <section class="body-shapes-grid">
+            <!-- Hourglass Shape -->
+            <div class="shape-card">
+                <img src="https://i.pinimg.com/1200x/ae/eb/d1/aeebd18f069f9692cc3213fba6f52bea.jpg" alt="Hourglass Body Shape" class="shape-image">
+                <div class="shape-content">
+                    <h2 class="shape-title">Hourglass</h2>
+                    <p class="shape-description">Characterized by balanced bust and hips with a well-defined waist.</p>
+                    
+                    <div class="dresses-container">
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/3e/29/46/3e29467a83427b10c30cd1a5c70539c2.jpg" alt="Dress for Hourglass" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/9f/54/67/9f5467b5df77c8a378c2588d4d62f54d.jpg" alt="Dress for Hourglass" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/2f/c2/9e/2fc29e3ff97a1b83a3c24c467d965d87.jpg" alt="Dress for Hourglass" class="dress-image">
+                        </div>
+                    </div>
+                    
+                    <div class="styling-tips">
+                        <h3 class="tips-title">Styling Tips</h3>
+                        <ul class="tips-list">
+                            <li>Emphasize your waist with belts</li>
+                            <li>Choose wrap dresses and fitted tops</li>
+                            <li>High-waisted bottoms work well</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pear Shape -->
+            <div class="shape-card">
+                <img src="https://i.pinimg.com/1200x/ad/44/84/ad44846237a581fecea1d690e2e95610.jpg" alt="Pear Body Shape" class="shape-image">
+                <div class="shape-content">
+                    <h2 class="shape-title">Pear</h2>
+                    <p class="shape-description">Wider hips and thighs compared to the upper body with a defined waist.</p>
+                    
+                    <div class="dresses-container">
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/aa/78/95/aa78954961ed30cf6867e6b01060131a.jpg" alt="Dress for Pear" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/e7/65/21/e765218bd7172d2a2582445087ecfe07.jpg" alt="Dress for Pear" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/c3/89/09/c3890922fce87ff6b2a4b9a7f9d8fd45.jpg" alt="Dress for Pear" class="dress-image">
+                        </div>
+                    </div>
+                    
+                    <div class="styling-tips">
+                        <h3 class="tips-title">Styling Tips</h3>
+                        <ul class="tips-list">
+                            <li>Draw attention to your upper body</li>
+                            <li>A-line skirts balance proportions</li>
+                            <li>Dark-colored bottoms minimize hips</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apple Shape -->
+            <div class="shape-card">
+                <img src="https://i.pinimg.com/736x/08/6b/a1/086ba10deac0b08c59b68217732e98a6.jpg" alt="Apple Body Shape" class="shape-image">
+                <div class="shape-content">
+                    <h2 class="shape-title">Apple</h2>
+                    <p class="shape-description">Wider torso and bust with slimmer hips and legs.</p>
+                    
+                    <div class="dresses-container">
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/1e/bd/19/1ebd19f241c2c4a66a05289517a8db63.jpg" alt="Dress for Apple" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/b3/2a/53/b32a534aa52bf2eba0e9f54e1faed56f.jpg" alt="Dress for Apple" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/15/29/e6/1529e60d5b4de099fdbbfddcaa41acb7.jpg" alt="Dress for Apple" class="dress-image">
+                        </div>
+                    </div>
+                    
+                    <div class="styling-tips">
+                        <h3 class="tips-title">Styling Tips</h3>
+                        <ul class="tips-list">
+                            <li>Empire waist dresses flatter your shape</li>
+                            <li>V-necklines elongate the upper body</li>
+                            <li>Flowy tops create a slimming effect</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rectangle Shape -->
+            <div class="shape-card">
+                <img src="https://i.pinimg.com/1200x/9e/36/b9/9e36b91939c8c295e55d417c751f6fc9.jpg" alt="Rectangle Body Shape" class="shape-image">
+                <div class="shape-content">
+                    <h2 class="shape-title">Rectangle</h2>
+                    <p class="shape-description">Similar measurements for bust, waist, and hips with minimal curves.</p>
+                    
+                    <div class="dresses-container">
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/e5/b5/69/e5b5690a15e005bf2590ec4c03cbb40e.jpg" alt="Dress for Rectangle" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/c2/fe/8c/c2fe8c5739a051d274f24104a64b6d84.jpg" alt="Dress for Rectangle" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/8e/e4/b2/8ee4b24167296e2b5e961c81453fbc1c.jpg" alt="Dress for Rectangle" class="dress-image">
+                        </div>
+                    </div>
+                    
+                    <div class="styling-tips">
+                        <h3 class="tips-title">Styling Tips</h3>
+                        <ul class="tips-list">
+                            <li>Create curves with peplum tops</li>
+                            <li>Belted dresses define your waist</li>
+                            <li>Asymmetrical details add dimension</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inverted Triangle Shape -->
+            <div class="shape-card">
+                <img src="https://i.pinimg.com/1200x/68/ae/01/68ae01af19f2e83efb45ba666e4821a8.jpg" alt="Inverted Triangle Body Shape" class="shape-image">
+                <div class="shape-content">
+                    <h2 class="shape-title">Inverted Triangle</h2>
+                    <p class="shape-description">Broader shoulders and bust compared to hips and waist.</p>
+                    
+                    <div class="dresses-container">
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/b0/0e/b8/b00eb8c494c05057338197603a909914.jpg" alt="Dress for Inverted Triangle" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/91/17/3b/91173bfb109e3fe2aad50e26444697cf.jpg" alt="Dress for Inverted Triangle" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/c9/3d/5d/c93d5d3dfb2e1247d4dd6d344953cb25.jpg" alt="Dress for Inverted Triangle" class="dress-image">
+                        </div>
+                    </div>
+                    
+                    <div class="styling-tips">
+                        <h3 class="tips-title">Styling Tips</h3>
+                        <ul class="tips-list">
+                            <li>Balance with wide-leg pants</li>
+                            <li>Scoop necklines soften shoulders</li>
+                            <li>Detailing on the lower body draws eye down</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spoon Shape -->
+            <div class="shape-card">
+                <img src="https://i.pinimg.com/1200x/ca/9e/4e/ca9e4ea30b7e1636fe958968370cfa46.jpg" alt="Spoon Body Shape" class="shape-image">
+                <div class="shape-content">
+                    <h2 class="shape-title">Triangle</h2>
+                    <p class="shape-description">Wider hips than shoulders, often with a well-defined waist and narrower upper body.</p>
+                    
+                    <div class="dresses-container">
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/b1/aa/da/b1aada3739d41038070e4605b966abed.jpg" alt="Dress for Spoon" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/d2/a1/c2/d2a1c2839ce364a30a75b313b008dbf9.jpg" alt="Dress for Spoon" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/64/fb/e2/64fbe2c76175de9a5b24991c4cfb24e4.jpg" alt="Dress for Spoon" class="dress-image">
+                        </div>
+                    </div>
+                    
+                    <div class="styling-tips">
+                        <h3 class="tips-title">Styling Tips</h3>
+                        <ul class="tips-list">
+                            <li>Add volume to your upper body with ruffles or puff sleeves</li>
+                            <li>Highlight your shoulders with boat neck or off-shoulder tops</li>
+                            <li>Go for A-line skirts or dresses to balance your silhouette</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diamond Shape -->
+            <div class="shape-card">
+                <img src="https://i.pinimg.com/736x/11/31/7c/11317c8e54eb3fd48a9e9ac2d5173235.jpg" alt="Diamond Body Shape" class="shape-image">
+                <div class="shape-content">
+                    <h2 class="shape-title">Diamond</h2>
+                    <p class="shape-description">Wider midsection with narrower bust and hips.</p>
+                    
+                    <div class="dresses-container">
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/4c/d2/dd/4cd2dd1b13f1d1ef69f60c3633a923a5.jpg" alt="Dress for Diamond" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/1200x/e1/81/f8/e181f8bbc70bee48665850b3e80128a7.jpg" alt="Dress for Diamond" class="dress-image">
+                        </div>
+                        <div class="dress-item">
+                            <img src="https://i.pinimg.com/736x/09/98/ab/0998ab4af50e0f20e964f1a8da5309a1.jpg" alt="Dress for Diamond" class="dress-image">
+                        </div>
+                    </div>
+                    
+                    <div class="styling-tips">
+                        <h3 class="tips-title">Styling Tips</h3>
+                        <ul class="tips-list">
+                            <li>Wrap dresses create an hourglass illusion</li>
+                            <li>Vertical stripes elongate your torso</li>
+                            <li>Structured jackets define your waist</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="identify-section">
+            <h2 class="cta-title">Discover Your Shape!</h2>
+            <p class="cta-subtitle">Ready to find your perfect body shape and get personalized styling recommendations? Let our AI analyze your beautiful silhouette! 💕</p>
+            <button class="identify-button" onclick="startCamera()">
+                <span class="camera-icon">📸</span>
+                Click to Identify My Shape
+            </button><br><br>
+            <div id="cameraView" style="display:none;">
+                <img src="{{ url_for('video_feed') }}" width="720" />
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 Pinfit. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function startCamera() {
+            // This function would normally call a Python backend to activate the camera
+            // For demonstration, we'll show the camera view
+            const cameraView = document.getElementById('cameraView');
+            cameraView.style.display = 'block';
+            
+            // In a real implementation, you would initialize the camera here
+            // The src attribute of the img tag would be set to the video feed from your Python backend
+            
+            // For demonstration purposes, we'll just show an alert
+            setTimeout(() => {
+                alert("Camera activated! This would normally connect to a Python backend for body shape analysis.");
+            }, 500);
+        }
+    </script>
+</body>
+</html>
